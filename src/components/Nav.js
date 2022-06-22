@@ -1,9 +1,4 @@
-import { HomeIcon, 
-				 SearchIcon, 
-				 ViewBoardsIcon, 
-				 PlusCircleIcon, 
-				 HeartIcon 
-} from '@heroicons/react/outline'
+import { HomeIcon, SearchIcon, ViewBoardsIcon, PlusCircleIcon, HeartIcon } from '@heroicons/react/outline'
 import NavItem from './NavItem'
 
 const activeNavItemClasses = 'flex items-center text-white bg-[#282828] mx-2 px-4 py-2 rounded';
