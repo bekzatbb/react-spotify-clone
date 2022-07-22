@@ -31,16 +31,25 @@ const menuItems = [
 function Playlist({ classes, coverUrl, title, description }) {
   const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
 
+  const bgClasses = isContextMenuOpen
+    ? 'bg-[#272727]'
+    : 'bg-[#181818] hover:bg-[#272727]'
+
   function openContextMenu(event) {
     event.preventDefault();
 
     setIsContextMenuOpen(true);
   }
 
+  function closeContextMenu() {
+    setIsContextMenuOpen(false);
+  }
+
 	return (
 		<a href="/" 
-       className={ `relative p-4 rounded-md bg-[#181818] hover:bg-[#272727] duration-200 group ${classes}` }
+       className={ `relative p-4 rounded-md duration-200 group ${classes} ${bgClasses}` }
        onContextMenu={ openContextMenu }
+       onClick={(event) => event.preventDefault()}
     >
       <div className="relative">
       	<PlaylistCover url={ coverUrl } />
@@ -50,6 +59,7 @@ function Playlist({ classes, coverUrl, title, description }) {
       <PlaylistDescription description={ description } />
       { isContextMenuOpen && (<PlaylistContextMenu
         menuItems={ menuItems }
+        onClose={ closeContextMenu }
         classes="absolute top-9 left-9 bg-[#282828] text-[#eaeaea] text-sm divide-y divide-[#3e3e3e] p-1 rounded shadow-xl cursor-default whitespace-nowrap z-10 hidden group-hover:block"
       />) }
     </a>
