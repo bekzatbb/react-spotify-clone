@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import PlaylistContextMenu from './PlaylistContextMenu'
 import PlaylistCover from './PlaylistCover'
 import PlaylistButtonPlay from './PlaylistButtonPlay'
@@ -30,7 +30,7 @@ const menuItems = [
 
 const clickPosition = { x: null, y: null };
 
-function Playlist({ classes, coverUrl, title, description }) {
+function Playlist({ classes, coverUrl, title, description, toggleScrolling }) {
   const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
   const contextMenuRef = useRef(null);
 
@@ -43,9 +43,19 @@ function Playlist({ classes, coverUrl, title, description }) {
     contextMenuRef.current.style.left = `${clickPosition.x}px`;
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    toggleScrolling(!isContextMenuOpen);
+
     if (isContextMenuOpen) {
       updateContextMenuPosition();
+    }
+  });
+
+  useEffect(() => {
+    if (!isContextMenuOpen) return;
+
+    function handleClickAway(event) {
+      // body...
     }
   });
 
